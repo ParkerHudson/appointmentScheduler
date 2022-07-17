@@ -1,6 +1,5 @@
 package project.views;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 
@@ -16,7 +15,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.Window;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +26,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 
-public class Frame_Patient extends JFrame {
+public class Frame_Doctor extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnEdit;
@@ -43,7 +41,7 @@ public class Frame_Patient extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Frame_Patient frame = new Frame_Patient();
+					Frame_Doctor frame = new Frame_Doctor();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,8 +56,8 @@ public class Frame_Patient extends JFrame {
 	/**
 	 * Creates the frame.
 	 */
-	public Frame_Patient() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Frame_Patient.class.getResource("/project/resources/icon.png")));
+	public Frame_Doctor() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Frame_Doctor.class.getResource("/project/resources/icon.png")));
 		setTitle("Big Bob's Band-aids & More");
 		init_components();
 		create_events();
@@ -72,7 +70,7 @@ public class Frame_Patient extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		// CENTERS THE THINGY
+		// Centers the Jframe
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		
@@ -88,8 +86,8 @@ public class Frame_Patient extends JFrame {
 		
 		scrollPane = new JScrollPane();
 		
-		JLabel lblPatients = new JLabel("Patients");
-		lblPatients.setFont(new Font("CMU Serif", Font.BOLD, 24));
+		JLabel lblDoctors = new JLabel("Doctors");
+		lblDoctors.setFont(new Font("CMU Serif", Font.BOLD, 24));
 		
 		btnCreate = new JButton("Create");
 		btnCreate.setFont(new Font("CMU Serif", Font.PLAIN, 25));
@@ -108,7 +106,7 @@ public class Frame_Patient extends JFrame {
 							.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(61)
-							.addComponent(lblPatients, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(lblDoctors, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)))
 					.addGap(18)
 					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
 					.addContainerGap())
@@ -117,19 +115,18 @@ public class Frame_Patient extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(lblPatients, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-							.addGap(28)
-							.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnEdit, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-							.addGap(74))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 335, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 335, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addGap(29)
+					.addComponent(lblDoctors, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+					.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnEdit, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+					.addGap(74))
 		);
 		
 		table = new JTable();
@@ -139,7 +136,7 @@ public class Frame_Patient extends JFrame {
 		
 		
 		try {
-			String query = "SELECT * FROM patients";
+			String query = "SELECT * FROM doctors";
 			PreparedStatement pStmt = connection.prepareStatement(query);
 			ResultSet rs = pStmt.executeQuery();
 			table.setModel(DbUtils.resultSetToTableModel(rs));
@@ -158,22 +155,13 @@ public class Frame_Patient extends JFrame {
 	private void create_events() {
 		
 		
-		// Switches to the Frame1 (main menu frame)
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				contentPane.setVisible(false);
-				dispose();
-				Frame1.main(null);
-			}
-		});
-		
-		// Switches to the Create Patient Frame
+		// Switches to the Create Doctor Frame
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Frame_PatientCreate createPatient;
+				Frame_DoctorCreate createDoc;
 				try {
-					createPatient = new Frame_PatientCreate();
-					createPatient.setVisible(true);
+					createDoc = new Frame_DoctorCreate();
+					createDoc.setVisible(true);
 					dispose();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -181,12 +169,21 @@ public class Frame_Patient extends JFrame {
 			}
 		});
 		
-		// Switches to the Edit Patient Frame
+		// Switches to the Edit Doctor Frame
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Frame_PatientEdit editPatient = new Frame_PatientEdit();
-				editPatient.setVisible(true);
+				Frame_DoctorEdit editDoc = new Frame_DoctorEdit();
+				editDoc.setVisible(true);
 				dispose();
+			}
+		});
+		
+		// Switches to the Frame1 (main menu frame)
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane.setVisible(false);
+				dispose();
+				Frame1.main(null);
 			}
 		});
 	}

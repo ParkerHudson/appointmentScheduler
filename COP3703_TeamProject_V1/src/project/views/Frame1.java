@@ -75,6 +75,7 @@ public class Frame1 {
 		btnPatient.setFont(new Font("CMU Serif", Font.PLAIN, 25));
 		
 		btnDoctors = new JButton("Doctors");
+		
 		btnDoctors.setFont(new Font("CMU Serif", Font.PLAIN, 25));
 		
 		btnAppointments = new JButton("Appointments");
@@ -139,6 +140,8 @@ public class Frame1 {
 	 * 	This method contains all  of the code for event handling
 	 */
 	private void create_events() {
+		
+		// sets frame to patients
 		btnPatient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame1.dispose();
@@ -147,6 +150,19 @@ public class Frame1 {
 			}
 		});
 		
+		// sets frame to doctors
+		btnDoctors.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame1.dispose();
+				Frame_Doctor frame_doc = new Frame_Doctor();
+				frame_doc.setVisible(true);
+			}
+		});
+		
+		
+		
+		
+		// exits program
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame1.dispose();
