@@ -455,7 +455,6 @@ public class Frame_PatientCreate extends JFrame {
 				Frame_Patient frame_pat = new Frame_Patient();
 				frame_pat.setVisible(true);
 				dispose(); 
-				
 			}
 		});
 		

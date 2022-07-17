@@ -158,7 +158,6 @@ public class Frame_Patient extends JFrame {
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
-
 			}
 		});
 		
