@@ -87,6 +87,7 @@ public class Frame_PatientCreate extends JFrame {
 	 * @throws SQLException 
 	 */
 	public Frame_PatientCreate() throws SQLException {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Frame_PatientCreate.class.getResource("/project/resources/icon.png")));
 		init_components();		
 		create_events();
 		

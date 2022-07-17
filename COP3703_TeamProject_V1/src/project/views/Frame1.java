@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import project.common.jdbc_connection;
+import java.awt.Toolkit;
 
 public class Frame1 {
 
@@ -64,6 +65,7 @@ public class Frame1 {
 	 */
 	private void init_components() {
 		frame1 = new JFrame();
+		frame1.setIconImage(Toolkit.getDefaultToolkit().getImage(Frame1.class.getResource("/project/resources/icon.png")));
 		frame1.setTitle("Big Bob's Band-aids & More");
 		frame1.setBounds(100, 100, 716, 494);
 		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

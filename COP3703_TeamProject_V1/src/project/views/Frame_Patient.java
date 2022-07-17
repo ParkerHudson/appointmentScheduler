@@ -58,6 +58,7 @@ public class Frame_Patient extends JFrame {
 	 * Creates the frame.
 	 */
 	public Frame_Patient() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Frame_Patient.class.getResource("/project/resources/icon.png")));
 		setTitle("Big Bob's Band-aids & More");
 		init_components();
 		create_events();
