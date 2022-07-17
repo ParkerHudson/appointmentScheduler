@@ -7,5 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Oracle/ojdbc11.jar"/>
+	<classpathentry kind="lib" path="C:/Oracle/rs2xml.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

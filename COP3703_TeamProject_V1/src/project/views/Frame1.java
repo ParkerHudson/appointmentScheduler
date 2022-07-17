@@ -3,8 +3,6 @@ package project.views;
 import java.awt.EventQueue;
 import java.sql.*;
 import javax.swing.JFrame;
-
-import projects.common.jdbc_connection;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -13,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import project.common.jdbc_connection;
 
 public class Frame1 {
 
@@ -34,18 +34,20 @@ public class Frame1 {
 		});
 	}
 	
-	Connection connection = null;
+//	Connection connection = null;
 	private JButton btnPatient;
 	private JButton btnDoctors;
 	private JButton btnAppointments;
 	private JButton btnBills;
+	private JButton btnViews;
+	private JButton btnExit;
 	
 	/**
 	 * Create the application.
 	 */
 	public Frame1() {
 		initialize();
-		connection = jdbc_connection.dbConnection(); // connects to database
+//		connection = jdbc_connection.dbConnection(); // connects to database
 	}
 
 	/**	
@@ -62,8 +64,10 @@ public class Frame1 {
 	 */
 	private void init_components() {
 		frame1 = new JFrame();
-		frame1.setBounds(100, 100, 716, 422);
+		frame1.setTitle("Big Bob's Band-aids & More");
+		frame1.setBounds(100, 100, 716, 494);
 		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame1.setLocationRelativeTo(null); // centers the frame in the screen
 		
 		btnPatient = new JButton("Patients");
 		btnPatient.setFont(new Font("CMU Serif", Font.PLAIN, 25));
@@ -76,23 +80,43 @@ public class Frame1 {
 		
 		btnBills = new JButton("Bills");
 		btnBills.setFont(new Font("CMU Serif", Font.PLAIN, 25));
+		
+		btnViews = new JButton("Views");
+		btnViews.setFont(new Font("CMU Serif", Font.PLAIN, 25));
+		
+		btnExit = new JButton("Exit");
+		
+		btnExit.setFont(new Font("CMU Serif", Font.PLAIN, 25));
 
 		GroupLayout groupLayout = new GroupLayout(frame1.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(20)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnBills, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnAppointments, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnDoctors, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnPatient, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(471, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnPatient, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnDoctors, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnAppointments, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnBills, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnViews, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(478, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(46)
+					.addContainerGap()
 					.addComponent(btnPatient, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(btnDoctors, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
@@ -100,7 +124,11 @@ public class Frame1 {
 					.addComponent(btnAppointments, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(btnBills, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-					.addGap(170))
+					.addGap(18)
+					.addComponent(btnViews, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+					.addGap(52))
 		);
 		frame1.getContentPane().setLayout(groupLayout);
 	}
@@ -114,6 +142,12 @@ public class Frame1 {
 				frame1.dispose();
 				Frame_Patient frame_patient = new Frame_Patient();
 				frame_patient.setVisible(true);
+			}
+		});
+		
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame1.dispose();
 			}
 		});
 		

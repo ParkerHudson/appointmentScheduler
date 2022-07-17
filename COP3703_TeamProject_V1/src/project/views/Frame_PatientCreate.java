@@ -1,22 +1,26 @@
 package project.views;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import projects.common.jdbc_connection;
+import project.common.jdbc_connection;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -76,6 +80,7 @@ public class Frame_PatientCreate extends JFrame {
 	
 	Connection connection = null; // connection var
 	private JComboBox cbGender;
+	private JButton btnBack;
 
 	/**
 	 * MAIN THINGY
@@ -91,10 +96,14 @@ public class Frame_PatientCreate extends JFrame {
 		
 		connection = jdbc_connection.dbConnection(); //db connection
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 576, 704);
+		setBounds(100, 100, 578, 704);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		
+		// Centers the Jframe
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		
 		txtLastName = new JTextField();
 		txtLastName.setToolTipText("Last name");
@@ -217,6 +226,10 @@ public class Frame_PatientCreate extends JFrame {
 		
 		
 		btnCreate.setFont(new Font("CMU Serif", Font.BOLD, 18));
+		
+		btnBack = new JButton("Back");
+		
+		btnBack.setFont(new Font("CMU Serif", Font.BOLD, 18));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -292,8 +305,10 @@ public class Frame_PatientCreate extends JFrame {
 									.addComponent(lblSsn, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
 									.addComponent(txtSSN, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)))
-							.addPreferredGap(ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-							.addComponent(btnCreate))
+							.addPreferredGap(ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnCreate)
+								.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(lblAddress, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)))
@@ -303,7 +318,10 @@ public class Frame_PatientCreate extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(lblTitle)
 							.addGap(18)
@@ -380,53 +398,67 @@ public class Frame_PatientCreate extends JFrame {
 	//////////////////////////////////////////////////////////
 	
 	public void create_events() {
+		
+		// creates a new patient
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String middle = "(No Initial)";
 				
 				String query = "INSERT INTO patients VALUES (?, ?, ?, TO_DATE(?, 'MM DD YYYY'), ?, ?, ?, ?)";
 				PreparedStatement pStmt;
-				try {
-					pStmt = connection.prepareStatement(query);
-					
-					pStmt.setString(1, txtFirstName.getText());	
-					
-					// checks for null middle initial
-					if (cbMiddleInitial.getSelectedItem().toString() == middle) {
-						pStmt.setString(2, null);
-					} else {
-						pStmt.setString(2, cbMiddleInitial.getSelectedItem().toString());
-					}
-					
-					pStmt.setString(3, txtLastName.getText());	
-					pStmt.setString(4, concat_bday());	
-					pStmt.setString(5, txtInsuranceID.getText());
-					
-					// checks for null middle initial
-					if (cbGender.getSelectedItem().toString() == "Male") {
-						pStmt.setString(6, "M");
-					} else {
-						pStmt.setString(6, "F");
-					}
-					
-					pStmt.setString(7, txtSSN.getText());
-					pStmt.setString(8, concat_address());
-					
-					
-					
-					
-					pStmt.executeQuery();
-					JOptionPane.showMessageDialog(null, "Patient Created");
-					
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 				
-				
+				while (verify_string(txtFirstName) == true && verify_string(txtLastName) == true 
+						&& verify_int(txtSSN) == true && verify_int(txtInsuranceID) == true) {
+					try {
+						pStmt = connection.prepareStatement(query);
+						
+						
+						
+						pStmt.setString(1, txtFirstName.getText());	
+						
+						// checks for null middle initial
+						if (cbMiddleInitial.getSelectedItem().toString() == "(No Initial)") {
+							pStmt.setString(2, null);
+						} else {
+							pStmt.setString(2, cbMiddleInitial.getSelectedItem().toString());
+						}
+						
+						pStmt.setString(3, txtLastName.getText());	
+						pStmt.setString(4, concat_bday());	
+						
+						pStmt.setString(5, txtInsuranceID.getText());
+						
+						// checks for null middle initial
+						if (cbGender.getSelectedItem().toString() == "Male") {
+							pStmt.setString(6, "M");
+						} else {
+							pStmt.setString(6, "F");
+						}
+						
+						pStmt.setString(7, txtSSN.getText());
+						pStmt.setString(8, concat_address());
+						
+						pStmt.executeQuery();
+						JOptionPane.showMessageDialog(null, "Patient Created");
+						break;
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Cannot insert NULL into one or more fields");
+						break;
+					}
+				} 
+			}
+		});
+		
+		// returns to Frame_Patient
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Frame_Patient frame_pat = new Frame_Patient();
+				frame_pat.setVisible(true);
+				dispose(); 
 				
 			}
 		});
+		
 	}
 	
 	private String concat_address() { 
@@ -440,6 +472,27 @@ public class Frame_PatientCreate extends JFrame {
 		String bday = cbMonth.getSelectedItem().toString() + " " + cbDay.getSelectedItem().toString() 
 					+ " " + cbYear.getSelectedItem().toString();
 		return bday;
-		
 	}
+	
+	private boolean verify_string(JComponent input) {
+        String text = ((JTextField) input).getText();
+        try {
+			Integer.parseInt(text);
+			JOptionPane.showMessageDialog(null, "Numerical values in names are not allowed");
+			return false;
+		} catch (NumberFormatException e) {
+			return true;
+		}  
+    }
+	
+	private boolean verify_int(JComponent input) {
+        String text = ((JTextField) input).getText();
+        try {
+			Integer.parseInt(text);
+			return true;
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Invalid SSN / InsuranceID");
+			return false;
+		}  
+    }
 }
