@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import project.common.input_verify;
 import project.common.jdbc_connection;
 
 import javax.swing.JLabel;
@@ -181,6 +182,12 @@ public class Frame_DoctorEdit extends JFrame {
 		txtSpecialization.setColumns(10);
 		txtSpecialization.setBounds(141, 291, 244, 27);
 		contentPane.add(txtSpecialization);
+		
+		btnDelete = new JButton("Delete");
+		
+		btnDelete.setFont(new Font("CMU Serif", Font.PLAIN, 16));
+		btnDelete.setBounds(307, 59, 94, 25);
+		contentPane.add(btnDelete);
 	}
 	
 	/**
@@ -202,6 +209,15 @@ public class Frame_DoctorEdit extends JFrame {
 			}
 		});
 		
+		// deletes
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int action = JOptionPane.showConfirmDialog(null, "Do you really want to delete?","Choose an option",JOptionPane.YES_NO_OPTION);
+				if (action == 0) {
+					info_delete(txtSearch.getText());
+				}
+			}
+		});
 		
 		
 		// returns to doctor screen
@@ -216,6 +232,7 @@ public class Frame_DoctorEdit extends JFrame {
 	}
 	
 	PreparedStatement pStmt;
+	private JButton btnDelete;
 	
 	//displays all the information on searched doctor
 	private void display_info(String id) {
@@ -241,9 +258,9 @@ public class Frame_DoctorEdit extends JFrame {
 	
 	// edits doctor information
 	private void edit_info(String id) {
-		
-		while (verify_string(txtFirstName) == true && verify_string(txtLastName) == true 
-				&& verify_int(txtDoctorID) == true && verify_string(txtSpecialization) == true) {
+		input_verify input_verify = new input_verify();
+		while (input_verify.verify(txtFirstName) == true && input_verify.verify(txtLastName) == true 
+				&& input_verify.verify_int(txtDoctorID) == true && input_verify.verify(txtSpecialization) == true) {
 			try {
 				
 				String query = "UPDATE doctors SET dfname=?, dminit=?, dlname=?, doctorid=?, specilization=? WHERE doctorid=?";
@@ -265,27 +282,17 @@ public class Frame_DoctorEdit extends JFrame {
 		}
 	} 
 	
-	// checks if string contains integers FALSE = INTEGERS PRESENT
-	private boolean verify_string(JComponent input) {
-        String text = ((JTextField) input).getText();
-        try {
-			Integer.parseInt(text);
-			JOptionPane.showMessageDialog(null, "Numerical values in select fields are not allowed");
-			return false;
-		} catch (NumberFormatException e) {
-			return true;
-		}  
-    }
-	
-	// checks if int contains char FALSE = STRING PRESENT
-	private boolean verify_int(JComponent input) {
-        String text = ((JTextField) input).getText();
-        try {
-			Integer.parseInt(text);
-			return true;
-		} catch (NumberFormatException e) {
-			JOptionPane.showMessageDialog(null, "Invalid DoctorID / Specialization");
-			return false;
-		}  
-    }
+	private void info_delete(String doctorid) {
+		String query = "DELETE FROM doctors WHERE doctorid=?";
+		try {
+			PreparedStatement pStmt = connection.prepareStatement(query);
+			pStmt.setString(1, doctorid);	
+			pStmt.executeQuery();
+			JOptionPane.showMessageDialog(null, "Doctor Deleted");
+			pStmt.close();
+
+		} catch (java.sql.SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
 }

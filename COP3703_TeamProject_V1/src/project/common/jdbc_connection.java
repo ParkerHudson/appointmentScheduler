@@ -8,8 +8,8 @@ public class jdbc_connection {
 	public static Connection dbConnection() {
 		
 		String url = "jdbc:oracle:thin:@cisvm-oracle.unfcsd.unf.edu:1521:orcl";
-		String user = "T8";
-		String pwd = "garbage1";
+		String user = "n01477544";
+		String pwd = "dolphinhorse188";
 		
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");

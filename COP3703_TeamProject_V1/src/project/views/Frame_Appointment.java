@@ -139,21 +139,16 @@ public class Frame_Appointment extends JFrame {
 			}
 		});
 		
-		// Switches to the Create Patient Frame
+		// Switches to the Create Appointment Frame
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Frame_PatientCreate createPatient;
-				try {
-					createPatient = new Frame_PatientCreate();
-					createPatient.setVisible(true);
-					dispose();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
+				Frame_AppointmentCreate createApp = new Frame_AppointmentCreate();
+				createApp.setVisible(true);
+				dispose();
 			}
 		});
 		
-		// Switches to the Edit Patient Frame
+		// Switches to the Edit Appointment Frame
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Frame_PatientEdit editPatient = new Frame_PatientEdit();
