@@ -1,4 +1,4 @@
-package project.views;
+package project.unused;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -30,6 +30,8 @@ public class Frame_AppointmentCreate extends JFrame {
 	 * Create the frame.
 	 */
 	public Frame_AppointmentCreate() {
+		setTitle("Big Bob's Band-aids & More");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Frame_AppointmentCreate.class.getResource("/project/resources/icon.png")));
 		init_components();
 		create_events();
 
@@ -44,10 +46,10 @@ public class Frame_AppointmentCreate extends JFrame {
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Create New Appointments");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel.setBounds(232, 11, 239, 40);
-		getContentPane().add(lblNewLabel);
+		JLabel lblTitle = new JLabel("Create New Appointments");
+		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblTitle.setBounds(233, 11, 239, 40);
+		getContentPane().add(lblTitle);
 		
 		
 	}

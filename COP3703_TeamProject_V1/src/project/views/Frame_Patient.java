@@ -136,8 +136,7 @@ public class Frame_Patient extends JFrame {
 		table.setColumnSelectionAllowed(true);
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
-		
-		
+
 		try {
 			String query = "SELECT * FROM patients";
 			PreparedStatement pStmt = connection.prepareStatement(query);

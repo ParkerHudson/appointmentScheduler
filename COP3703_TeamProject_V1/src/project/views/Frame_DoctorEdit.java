@@ -240,7 +240,6 @@ public class Frame_DoctorEdit extends JFrame {
 			String query = "SELECT * FROM doctors WHERE doctorid = '" + id + "'";
 			pStmt = connection.prepareStatement(query);
 			ResultSet rs = pStmt.executeQuery();
-
 			while (rs.next()) {
 				txtFirstName.setText(rs.getString(1));
 				cbMiddleInitial.getEditor().setItem(rs.getString(2));
@@ -248,7 +247,6 @@ public class Frame_DoctorEdit extends JFrame {
 				txtDoctorID.setText(rs.getString(4));
 				txtSpecialization.setText(rs.getString(5));
 			}	
-			
 			pStmt.close();
 		} catch (SQLException e1) {	
 			e1.printStackTrace();
@@ -290,7 +288,6 @@ public class Frame_DoctorEdit extends JFrame {
 			pStmt.executeQuery();
 			JOptionPane.showMessageDialog(null, "Doctor Deleted");
 			pStmt.close();
-
 		} catch (java.sql.SQLException e1) {
 			e1.printStackTrace();
 		}
