@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import project.common.input_verify;
 import project.common.jdbc_connection;
 
 import javax.swing.GroupLayout;
@@ -380,12 +381,13 @@ public class Frame_PatientCreate extends JFrame {
 		// creates a new patient
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				input_verify verify = new input_verify();
 				
 				String query = "INSERT INTO patients VALUES (?, ?, ?, TO_DATE(?, 'MM DD YYYY'), ?, ?, ?, ?)";
 				PreparedStatement pStmt;
 				
-				while (verify_string(txtFirstName) == true && verify_string(txtLastName) == true 
-						&& verify_int(txtSSN) == true && verify_int(txtInsuranceID) == true) {
+				while (verify.verify(txtFirstName) == true && verify.verify(txtLastName) == true 
+						&& verify.verify_int(txtSSN) == true && verify.verify(txtInsuranceID) == true) {
 					try {
 						pStmt = connection.prepareStatement(query);
 						
@@ -417,6 +419,7 @@ public class Frame_PatientCreate extends JFrame {
 						
 						pStmt.executeQuery();
 						JOptionPane.showMessageDialog(null, "Patient Created");
+						pStmt.close();
 						break;
 					} catch (java.sql.SQLIntegrityConstraintViolationException e1) {
 						JOptionPane.showMessageDialog(null, "Cannot be created due to an existing Patient SSN");
@@ -440,6 +443,7 @@ public class Frame_PatientCreate extends JFrame {
 		
 	}
 	
+	// fix de address yes
 	private String concat_address() { 
 		String address = "";
 		address = txtStreet.getText() + ", " + txtCity.getText()+ " " + txtState.getText() 
@@ -466,32 +470,7 @@ public class Frame_PatientCreate extends JFrame {
 	
 		} catch (ParseException e) {
 			e.printStackTrace();
-		}
-		
+		}	
 		return bday;
 	}
-	
-	// checks if string contains integers FALSE = INTEGERS PRESENT
-	private boolean verify_string(JComponent input) {
-        String text = ((JTextField) input).getText();
-        try {
-			Integer.parseInt(text);
-			JOptionPane.showMessageDialog(null, "Numerical values in names are not allowed");
-			return false;
-		} catch (NumberFormatException e) {
-			return true;
-		}  
-    }
-	
-	// checks if int contains char FALSE = STRING PRESENT
-	private boolean verify_int(JComponent input) {
-        String text = ((JTextField) input).getText();
-        try {
-			Integer.parseInt(text);
-			return true;
-		} catch (NumberFormatException e) {
-			JOptionPane.showMessageDialog(null, "Invalid SSN / InsuranceID");
-			return false;
-		}  
-    }
 }

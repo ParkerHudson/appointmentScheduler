@@ -1,4 +1,4 @@
-package project.views;
+package project.unused;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 
 import net.proteanit.sql.DbUtils;
 import project.common.jdbc_connection;
+import project.views.Frame1;
+import project.views.Frame_PatientEdit;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -27,14 +29,18 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import java.awt.Component;
+import java.awt.Rectangle;
 
 public class Frame_Appointment extends JFrame {
 
 	private JPanel contentPane;
-	private JButton btnEdit;
-	private JButton btnBack;
-	private JScrollPane scrollPane;
-	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -53,7 +59,6 @@ public class Frame_Appointment extends JFrame {
 	}
 	
 	Connection connection = null; // connection var
-	private JButton btnCreate;
 
 	/**
 	 * Creates the frame.
@@ -77,49 +82,26 @@ public class Frame_Appointment extends JFrame {
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		btnEdit = new JButton("Edit");
-		btnEdit.setBounds(15, 173, 212, 57);
-		
-		btnEdit.setFont(new Font("CMU Serif", Font.PLAIN, 25));
-		
-		btnBack = new JButton("Back");
-		btnBack.setBounds(15, 241, 212, 57);
-		
-		btnBack.setFont(new Font("CMU Serif", Font.PLAIN, 25));
-		
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(245, 16, 629, 335);
-		
-		JLabel lblAppointments = new JLabel("Appointments");
-		lblAppointments.setBounds(32, 35, 181, 32);
-		lblAppointments.setFont(new Font("CMU Serif", Font.BOLD, 24));
-		
-		btnCreate = new JButton("Create");
-		btnCreate.setBounds(15, 105, 212, 57);
-		btnCreate.setFont(new Font("CMU Serif", Font.PLAIN, 25));
-		
-		table = new JTable();
-		table.setColumnSelectionAllowed(true);
-		scrollPane.setViewportView(table);
+		JLabel lblNewLabel_1 = new JLabel("Temp");
+		lblNewLabel_1.setMaximumSize(new Dimension(100, 80));
+		lblNewLabel_1.setBounds(new Rectangle(0, 20, 0, 0));
+		lblNewLabel_1.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+		lblNewLabel_1.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		lblNewLabel_1.setBounds(47, 125, 313, 102);
+		contentPane.add(lblNewLabel_1);
 		
 		
 		try {
 			String query = "SELECT * FROM appointments";
 			PreparedStatement pStmt = connection.prepareStatement(query);
 			ResultSet rs = pStmt.executeQuery();
-			table.setModel(DbUtils.resultSetToTableModel(rs));
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		contentPane.setLayout(null);
-		contentPane.add(btnBack);
-		contentPane.add(btnEdit);
-		contentPane.add(btnCreate);
-		contentPane.add(lblAppointments);
-		contentPane.add(scrollPane);
 		
 	}
 	
@@ -128,38 +110,5 @@ public class Frame_Appointment extends JFrame {
 	//////////////////////////////////////////////////////////
 
 	private void create_events() {
-		
-		
-		// Switches to the Frame1 (main menu frame)
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				contentPane.setVisible(false);
-				dispose();
-				Frame1.main(null);
-			}
-		});
-		
-		// Switches to the Create Patient Frame
-		btnCreate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Frame_PatientCreate createPatient;
-				try {
-					createPatient = new Frame_PatientCreate();
-					createPatient.setVisible(true);
-					dispose();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-		
-		// Switches to the Edit Patient Frame
-		btnEdit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Frame_PatientEdit editPatient = new Frame_PatientEdit();
-				editPatient.setVisible(true);
-				dispose();
-			}
-		});
 	}
 }

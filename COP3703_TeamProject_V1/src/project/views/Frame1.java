@@ -159,8 +159,14 @@ public class Frame1 {
 			}
 		});
 		
-		
-		
+		// sets frame to views
+		btnViews.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame1.dispose();
+				Frame_Views frame_views = new Frame_Views();
+				frame_views.setVisible(true);
+			}
+		});
 		
 		// exits program
 		btnExit.addActionListener(new ActionListener() {

@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import project.common.input_verify;
 import project.common.jdbc_connection;
 
 import javax.swing.GroupLayout;
@@ -223,12 +224,13 @@ public class Frame_DoctorCreate extends JFrame {
 		// creates a new patient
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				input_verify verify = new input_verify();
 				
 				String query = "INSERT INTO doctors VALUES (?, ?, ?, ?, ?)";
 				PreparedStatement pStmt;
 				
-				while (verify_string(txtFirstName) == true && verify_string(txtLastName) == true 
-						&& verify_int(txtDoctorID) == true && verify_string(txtSpecialization) == true) {
+				while (verify.verify(txtFirstName) == true && verify.verify(txtLastName) == true 
+						&& verify.verify_int(txtDoctorID) == true && verify.verify(txtSpecialization) == true) {
 					try {
 						pStmt = connection.prepareStatement(query);
 						
@@ -250,6 +252,7 @@ public class Frame_DoctorCreate extends JFrame {
 											
 						pStmt.executeQuery();
 						JOptionPane.showMessageDialog(null, "Doctor Created");
+						pStmt.close();
 						break;
 					} catch (java.sql.SQLIntegrityConstraintViolationException e1) {
 						JOptionPane.showMessageDialog(null, "Cannot be created due to an existing Doctor ID");
@@ -273,28 +276,4 @@ public class Frame_DoctorCreate extends JFrame {
 		});
 		
 	}
-	
-	// checks if string contains integers FALSE = INTEGERS PRESENT
-	private boolean verify_string(JComponent input) {
-        String text = ((JTextField) input).getText();
-        try {
-			Integer.parseInt(text);
-			JOptionPane.showMessageDialog(null, "Numerical values in select fields are not allowed");
-			return false;
-		} catch (NumberFormatException e) {
-			return true;
-		}  
-    }
-	
-	// checks if int contains char FALSE = STRING PRESENT
-	private boolean verify_int(JComponent input) {
-        String text = ((JTextField) input).getText();
-        try {
-			Integer.parseInt(text);
-			return true;
-		} catch (NumberFormatException e) {
-			JOptionPane.showMessageDialog(null, "Invalid DoctorID / Specialization");
-			return false;
-		}  
-    }
 }
