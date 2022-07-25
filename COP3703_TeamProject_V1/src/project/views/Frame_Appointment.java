@@ -1,4 +1,4 @@
-package project.unused;
+package project.views;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -10,8 +10,6 @@ import javax.swing.border.EmptyBorder;
 
 import net.proteanit.sql.DbUtils;
 import project.common.jdbc_connection;
-import project.views.Frame1;
-import project.views.Frame_PatientEdit;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -90,7 +88,7 @@ public class Frame_Appointment extends JFrame {
 		lblNewLabel_1.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 		lblNewLabel_1.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		lblNewLabel_1.setBounds(47, 125, 313, 102);
+		lblNewLabel_1.setBounds(10, 11, 313, 102);
 		contentPane.add(lblNewLabel_1);
 		
 		
