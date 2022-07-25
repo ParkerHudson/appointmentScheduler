@@ -1,4 +1,4 @@
-package COP3703_TeamProject_V1.src.project.models;
+package project.models;
 
 import java.sql.*;
 import java.sql.Date;
