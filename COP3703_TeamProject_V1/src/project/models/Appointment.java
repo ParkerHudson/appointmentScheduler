@@ -4,26 +4,26 @@ import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
-public class appointment {
+public class Appointment {
 
-  public String apptNum, roomNum, patientSSN, doctorID, confirmedPSSN; //confirmedPSSN is the foreign key
+  public String apptNum, roomNum, patientSSN, doctorID, apptTime; //confirmedPSSN is the foreign key
   public Date apptDate;
 
-  public appointment() {}
+  public Appointment() {}
 
-  public appointment(
+  public Appointment(
     String apptNum,
     String roomNum,
-    String patientSSN,
+    Date apptDate,
     String doctorID,
-    String confirmedPSSN,
-    Date apptDate
+    String patientSSN,       
+    String apptTime
   ) {
     this.apptNum = apptNum;
     this.roomNum = roomNum;
     this.patientSSN = patientSSN;
     this.doctorID = doctorID;
-    this.confirmedPSSN = confirmedPSSN;
     this.apptDate = apptDate;
+    this.apptTime = apptTime;
   }
 }

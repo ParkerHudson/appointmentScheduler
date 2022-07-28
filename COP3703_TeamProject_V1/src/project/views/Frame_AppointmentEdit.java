@@ -19,7 +19,7 @@ import net.proteanit.sql.DbUtils;
 
 import javax.swing.JCheckBox;
 
-public class Frame_AppointmentCreate extends JFrame {
+public class Frame_AppointmentEdit extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -32,7 +32,7 @@ public class Frame_AppointmentCreate extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Frame_AppointmentCreate frame = new Frame_AppointmentCreate();
+					Frame_AppointmentEdit frame = new Frame_AppointmentEdit();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,9 +44,9 @@ public class Frame_AppointmentCreate extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Frame_AppointmentCreate() {
+	public Frame_AppointmentEdit() {
 		setTitle("Big Bob's Band-aids & More");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Frame_AppointmentCreate.class.getResource("/project/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Frame_AppointmentEdit.class.getResource("/project/resources/icon.png")));
 		init_components();
 		create_events();
 

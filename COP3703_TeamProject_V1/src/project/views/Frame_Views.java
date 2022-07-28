@@ -84,7 +84,7 @@ public class Frame_Views extends JFrame {
 		btnActivePatients.setBounds(10, 82, 151, 38);
 		contentPane.add(btnActivePatients);
 		
-		JLabel lblTitle = new JLabel("Views");
+		JLabel lblTitle = new JLabel("Reports");
 		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblTitle.setBounds(51, 26, 73, 30);
 		contentPane.add(lblTitle);

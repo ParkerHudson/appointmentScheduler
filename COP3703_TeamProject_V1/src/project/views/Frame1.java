@@ -84,7 +84,7 @@ public class Frame1 {
 		btnBills = new JButton("Bills");
 		btnBills.setFont(new Font("CMU Serif", Font.PLAIN, 25));
 		
-		btnViews = new JButton("Views");
+		btnViews = new JButton("Reports");
 		btnViews.setFont(new Font("CMU Serif", Font.PLAIN, 25));
 		
 		btnExit = new JButton("Exit");
@@ -159,6 +159,16 @@ public class Frame1 {
 			}
 		});
 		
+		
+		//Set Frame to  appointments
+		btnAppointments.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame1.dispose();
+				Frame_Appointment frame_appt = new Frame_Appointment();
+				frame_appt.setVisible(true);
+			}
+		});
+		
 		// sets frame to views
 		btnViews.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -174,6 +184,8 @@ public class Frame1 {
 				frame1.dispose();
 			}
 		});
+		
+		
 		
 	}
 }

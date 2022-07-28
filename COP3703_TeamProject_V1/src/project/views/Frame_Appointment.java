@@ -1,6 +1,7 @@
 package project.views;
 
 import java.awt.BorderLayout;
+
 import java.awt.Dimension;
 import java.awt.EventQueue;
 
@@ -18,10 +19,15 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionListener;
+import java.sql.Array;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTable;
@@ -35,10 +41,18 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import java.awt.Component;
 import java.awt.Rectangle;
+import javax.swing.SwingConstants;
+
+import project.models.*;
 
 public class Frame_Appointment extends JFrame {
 
 	private JPanel contentPane;
+	private JButton btnEdit;
+	private JButton btnBack;
+	private JScrollPane scrollPane;
+	private JTable table;
+	
 
 	/**
 	 * Launch the application.
@@ -57,12 +71,14 @@ public class Frame_Appointment extends JFrame {
 	}
 	
 	Connection connection = null; // connection var
+	private JButton btnCreate;
+	private JButton btnBillAppt;
 
 	/**
 	 * Creates the frame.
 	 */
 	public Frame_Appointment() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Frame_Appointment.class.getResource("/project/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Frame_Doctor.class.getResource("/project/resources/icon.png")));
 		setTitle("Big Bob's Band-aids & More");
 		init_components();
 		create_events();
@@ -75,31 +91,116 @@ public class Frame_Appointment extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		// CENTERS THE THINGY
+		// Centers the Jframe
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("Temp");
-		lblNewLabel_1.setMaximumSize(new Dimension(100, 80));
-		lblNewLabel_1.setBounds(new Rectangle(0, 20, 0, 0));
-		lblNewLabel_1.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-		lblNewLabel_1.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		lblNewLabel_1.setBounds(10, 11, 313, 102);
-		contentPane.add(lblNewLabel_1);
+		btnEdit = new JButton("Edit");
+		
+		btnEdit.setFont(new Font("CMU Serif", Font.PLAIN, 25));
+		
+		btnBack = new JButton("Back");
+		
+		btnBack.setFont(new Font("CMU Serif", Font.PLAIN, 25));
+		
+		scrollPane = new JScrollPane();
+		
+		JLabel lblAppointments = new JLabel("Appointments");
+		lblAppointments.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAppointments.setFont(new Font("CMU Serif", Font.BOLD, 24));
+		
+		btnCreate = new JButton("Create");
+		btnCreate.setFont(new Font("CMU Serif", Font.PLAIN, 25));
+		
+		btnBillAppt = new JButton("Bill Appt");
+		btnBillAppt.setFont(new Font("Dialog", Font.PLAIN, 25));
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+							.addComponent(btnCreate, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+							.addComponent(lblAppointments, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+							.addComponent(btnEdit, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+							.addComponent(btnBack, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+						.addComponent(btnBillAppt, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
+					.addGap(18)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(29)
+							.addComponent(lblAppointments, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+							.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnEdit, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnBillAppt, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+							.addGap(5))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 335, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		
+		table = new JTable();
+		table.setColumnSelectionAllowed(true);
+		scrollPane.setViewportView(table);
+		contentPane.setLayout(gl_contentPane);
 		
 		
 		try {
 			String query = "SELECT * FROM appointments";
 			PreparedStatement pStmt = connection.prepareStatement(query);
 			ResultSet rs = pStmt.executeQuery();
+			//table.setModel(DbUtils.resultSetToTableModel(rs));
+			
+			//Date dates;
+			//dates = rs.getDate(3);
+			SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
+			List<Appointment> apptEntities = new ArrayList<>();
+			
+			while(rs.next()) {
+				Appointment appt = new Appointment(
+						rs.getString(1),
+						rs.getString(2),
+						rs.getDate(3),
+						rs.getString(4),
+						rs.getString(5),
+						sdf.format(rs.getDate(6))
+						);
+				apptEntities.add(appt);
+				
+			}
+			
+			for (Appointment temp : apptEntities) {
+		        System.out.println(
+		          temp.apptNum + " " + 
+		          temp.roomNum + " " + 
+		          temp.apptTime
+		        );
+		        System.out.println();
+		      }
+			
+			
+			
+			
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
 		
 	}
 	
@@ -108,5 +209,47 @@ public class Frame_Appointment extends JFrame {
 	//////////////////////////////////////////////////////////
 
 	private void create_events() {
+		
+		
+		// Switches to the Create appointment frame
+		btnCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Frame_AppointmentCreate createAppt;
+				try {
+					createAppt = new Frame_AppointmentCreate();
+					createAppt.setVisible(true);
+					dispose();
+				} catch (Error e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		// Switches to the Edit Appt Frame
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Frame_AppointmentEdit editAppt = new Frame_AppointmentEdit();
+				editAppt.setVisible(true);
+				dispose();
+			}
+		});
+		
+		//Switch to billing frame
+		btnBillAppt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Frame_BillAppointment billAppt = new Frame_BillAppointment();
+				billAppt.setVisible(true);
+				dispose();
+			}
+		});
+		
+		// Switches to the Frame1 (main menu frame)
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane.setVisible(false);
+				dispose();
+				Frame1.main(null);
+			}
+		});
 	}
 }
