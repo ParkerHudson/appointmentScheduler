@@ -318,7 +318,7 @@ public class Frame_PatientEdit extends JFrame {
 		PreparedStatement pStmt;
 		
 		while (input_verify.verify(txtFirstName) == true && input_verify.verify(txtLastName) == true 
-				&& input_verify.verify_int(txtSSN) == true && input_verify.verify_int(txtInsuranceID) == true) {
+				&& input_verify.verify_int(txtSSN) == true) {
 			try {
 				pStmt = connection.prepareStatement(query);
 				pStmt.setString(1, txtFirstName.getText());	
