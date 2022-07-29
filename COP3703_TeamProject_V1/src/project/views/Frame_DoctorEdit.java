@@ -67,7 +67,6 @@ public class Frame_DoctorEdit extends JFrame {
 	private JComboBox cbMiddleInitial;
 	private JTextField txtFirstName;
 	private JTextField txtLastName;
-	private JTextField txtDoctorID;
 	private JTextField txtSpecialization;
 	private JButton btnBack;
 	private JButton btnSave;
@@ -156,31 +155,19 @@ public class Frame_DoctorEdit extends JFrame {
 		txtLastName.setToolTipText("Last name");
 		txtLastName.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtLastName.setColumns(10);
-		txtLastName.setBounds(141, 215, 244, 27);
+		txtLastName.setBounds(139, 215, 244, 27);
 		contentPane.add(txtLastName);
-		
-		JLabel lbl = new JLabel("Doctor ID:");
-		lbl.setFont(new Font("CMU Serif", Font.BOLD, 16));
-		lbl.setBounds(10, 256, 113, 22);
-		contentPane.add(lbl);
-		
-		txtDoctorID = new JTextField();
-		txtDoctorID.setToolTipText("Doctor ID");
-		txtDoctorID.setFont(new Font("CMU Serif", Font.PLAIN, 16));
-		txtDoctorID.setColumns(10);
-		txtDoctorID.setBounds(141, 253, 244, 27);
-		contentPane.add(txtDoctorID);
 		
 		JLabel lblSpecialization = new JLabel("Specialization: ");
 		lblSpecialization.setFont(new Font("CMU Serif", Font.BOLD, 16));
-		lblSpecialization.setBounds(10, 291, 119, 22);
+		lblSpecialization.setBounds(10, 251, 119, 22);
 		contentPane.add(lblSpecialization);
 		
 		txtSpecialization = new JTextField();
 		txtSpecialization.setToolTipText("Specialization");
 		txtSpecialization.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtSpecialization.setColumns(10);
-		txtSpecialization.setBounds(141, 291, 244, 27);
+		txtSpecialization.setBounds(139, 253, 244, 27);
 		contentPane.add(txtSpecialization);
 		
 		btnDelete = new JButton("Delete");
@@ -244,7 +231,6 @@ public class Frame_DoctorEdit extends JFrame {
 				txtFirstName.setText(rs.getString(1));
 				cbMiddleInitial.getEditor().setItem(rs.getString(2));
 				txtLastName.setText(rs.getString(3));
-				txtDoctorID.setText(rs.getString(4));
 				txtSpecialization.setText(rs.getString(5));
 			}	
 			pStmt.close();
@@ -258,17 +244,16 @@ public class Frame_DoctorEdit extends JFrame {
 	private void edit_info(String id) {
 		input_verify input_verify = new input_verify();
 		while (input_verify.verify(txtFirstName) == true && input_verify.verify(txtLastName) == true 
-				&& input_verify.verify_int(txtDoctorID) == true && input_verify.verify(txtSpecialization) == true) {
+				 && input_verify.verify(txtSpecialization) == true) {
 			try {
 				
-				String query = "UPDATE doctors SET dfname=?, dminit=?, dlname=?, doctorid=?, specilization=? WHERE doctorid=?";
+				String query = "UPDATE doctors SET dfname=?, dminit=?, dlname=?, specilization=? WHERE doctorid=?";
 				pStmt = connection.prepareStatement(query);
 				pStmt.setString(1, txtFirstName.getText());	
 				pStmt.setString(2, cbMiddleInitial.getSelectedItem().toString());	
 				pStmt.setString(3, txtLastName.getText());
-				pStmt.setString(4, txtDoctorID.getText());
-				pStmt.setString(5, txtSpecialization.getText());
-				pStmt.setString(6, id);
+				pStmt.setString(4, txtSpecialization.getText());
+				pStmt.setString(5, id);
 				pStmt.execute();
 				JOptionPane.showMessageDialog(null, "Doctor Updated");	
 				pStmt.close();

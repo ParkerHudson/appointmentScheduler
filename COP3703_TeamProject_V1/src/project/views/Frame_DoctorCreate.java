@@ -42,7 +42,6 @@ public class Frame_DoctorCreate extends JFrame {
 	private JLabel lblMiddleInitial;
 	private JTextField txtFirstName;
 	private JComboBox cbMiddleInitial;
-	private JLabel lbl;
 	private JLabel lblTitle;
 	private JButton btnCreate;
 	
@@ -65,7 +64,6 @@ public class Frame_DoctorCreate extends JFrame {
 	Connection connection = null; // connection var
 	private JButton btnBack;
 	private JLabel lblSpecialization;
-	private JTextField txtDoctorID;
 	private JTextField txtSpecialization;
 
 	/**
@@ -117,9 +115,6 @@ public class Frame_DoctorCreate extends JFrame {
 		cbMiddleInitial.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		cbMiddleInitial.setModel(new DefaultComboBoxModel(new String[] {"(No Initial)", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}));
 		
-		lbl = new JLabel("Doctor ID:");
-		lbl.setFont(new Font("CMU Serif", Font.BOLD, 16));
-		
 		lblTitle = new JLabel("ADD NEW DOCTORS");
 		lblTitle.setFont(new Font("CMU Serif", Font.BOLD, 18));
 		
@@ -135,11 +130,6 @@ public class Frame_DoctorCreate extends JFrame {
 		lblSpecialization = new JLabel("Specialization: ");
 		lblSpecialization.setFont(new Font("CMU Serif", Font.BOLD, 16));
 		
-		txtDoctorID = new JTextField();
-		txtDoctorID.setToolTipText("Doctor ID");
-		txtDoctorID.setFont(new Font("CMU Serif", Font.PLAIN, 16));
-		txtDoctorID.setColumns(10);
-		
 		txtSpecialization = new JTextField();
 		txtSpecialization.setToolTipText("Specialization");
 		txtSpecialization.setFont(new Font("CMU Serif", Font.PLAIN, 16));
@@ -148,33 +138,25 @@ public class Frame_DoctorCreate extends JFrame {
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(10, Short.MAX_VALUE)
+					.addContainerGap(37, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(157)
 							.addComponent(lblTitle))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblName)
-							.addGap(52)
-							.addComponent(txtLastName, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblFirstName, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
-							.addGap(28)
-							.addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(lbl, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblSpecialization)))
-								.addComponent(lblMiddleInitial))
-							.addGap(29)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(txtDoctorID, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtSpecialization, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
-								.addComponent(cbMiddleInitial, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+								.addComponent(lblName)
+								.addComponent(lblFirstName, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblMiddleInitial)
+								.addComponent(lblSpecialization))
+							.addGap(22)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(cbMiddleInitial, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(Alignment.LEADING, gl_contentPane.createParallelGroup(Alignment.LEADING)
+									.addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
+									.addComponent(txtLastName, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
+									.addComponent(txtSpecialization, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnCreate))))
@@ -196,21 +178,18 @@ public class Frame_DoctorCreate extends JFrame {
 								.addComponent(lblName))
 							.addGap(11)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblFirstName))
+								.addComponent(lblFirstName)
+								.addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGap(11)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(cbMiddleInitial, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblMiddleInitial))
-							.addGap(55)
+								.addComponent(lblMiddleInitial)
+								.addComponent(cbMiddleInitial, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(26)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lbl)
-								.addComponent(txtDoctorID, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-							.addGap(13)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblSpecialization, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtSpecialization, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(111, Short.MAX_VALUE))
+								.addComponent(txtSpecialization, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblSpecialization, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
+							.addGap(74)))
+					.addContainerGap(17, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
@@ -226,11 +205,11 @@ public class Frame_DoctorCreate extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				input_verify verify = new input_verify();
 				
-				String query = "INSERT INTO doctors VALUES (?, ?, ?, ?, ?)";
+				String query = "INSERT INTO doctors VALUES (?, ?, ?, doctorid.nextval, ?)";
 				PreparedStatement pStmt;
 				
 				while (verify.verify(txtFirstName) == true && verify.verify(txtLastName) == true 
-						&& verify.verify_int(txtDoctorID) == true && verify.verify(txtSpecialization) == true) {
+				&& verify.verify(txtSpecialization) == true) {
 					try {
 						pStmt = connection.prepareStatement(query);
 						
@@ -247,8 +226,8 @@ public class Frame_DoctorCreate extends JFrame {
 						
 						pStmt.setString(3, txtLastName.getText());	
 						
-						pStmt.setString(4, txtDoctorID.getText());	
-						pStmt.setString(5, txtSpecialization.getText());	
+						//pStmt.setString(4, txtDoctorID.getText());	
+						pStmt.setString(4, txtSpecialization.getText());	
 											
 						pStmt.executeQuery();
 						JOptionPane.showMessageDialog(null, "Doctor Created");

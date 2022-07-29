@@ -3,6 +3,8 @@ package project.views;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,6 +28,7 @@ public class Frame_AppointmentCreate extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JButton btnBack;
 
 	/**
 	 * Launch the application.
@@ -151,10 +154,10 @@ public class Frame_AppointmentCreate extends JFrame {
 		
 		JButton btnCreate = new JButton("Create");
 		btnCreate.setFont(new Font("Dialog", Font.BOLD, 18));
-		btnCreate.setBounds(375, 275, 91, 66);
+		btnCreate.setBounds(375, 275, 97, 66);
 		getContentPane().add(btnCreate);
 		
-		JButton btnBack = new JButton("Back");
+		btnBack = new JButton("Back");
 		btnBack.setFont(new Font("Dialog", Font.BOLD, 18));
 		btnBack.setBounds(188, 275, 91, 66);
 		getContentPane().add(btnBack);
@@ -162,10 +165,19 @@ public class Frame_AppointmentCreate extends JFrame {
 		
 		
 		
-		
 	}
 	
 	private void create_events() {
+	
+	// returns to Frame_Apointment
+	btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Frame_Appointment frame = new Frame_Appointment();
+				frame.setVisible(true);
+				dispose(); 
+			}
+		});
+		
 		
 	}
 }
