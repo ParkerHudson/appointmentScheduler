@@ -8,6 +8,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import net.proteanit.sql.DbUtils;
 import project.common.jdbc_connection;
@@ -28,6 +29,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTable;
@@ -73,6 +75,7 @@ public class Frame_Appointment extends JFrame {
 	Connection connection = null; // connection var
 	private JButton btnCreate;
 	private JButton btnBillAppt;
+	private JTable table_1;
 
 	/**
 	 * Creates the frame.
@@ -154,9 +157,26 @@ public class Frame_Appointment extends JFrame {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		
+		table_1 = new JTable();
+		table_1.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Appt #", "Room #", "Appt Date", "Doctor ID", "Patient SSN", "Appt Time"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, String.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		scrollPane.setViewportView(table_1);
+		
 		table = new JTable();
 		table.setColumnSelectionAllowed(true);
-		scrollPane.setViewportView(table);
+		
 		contentPane.setLayout(gl_contentPane);
 		
 		
@@ -168,14 +188,15 @@ public class Frame_Appointment extends JFrame {
 			
 			//Date dates;
 			//dates = rs.getDate(3);
-			SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy");
+			SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
+			SimpleDateFormat aptDay = new SimpleDateFormat("MMM d, yyyy");
 			List<Appointment> apptEntities = new ArrayList<>();
 			
 			while(rs.next()) {
 				Appointment appt = new Appointment(
 						rs.getString(1),
 						rs.getString(2),
-						rs.getDate(3),
+						aptDay.format(rs.getDate(3)),
 						rs.getString(4),
 						rs.getString(5),
 						sdf.format(rs.getDate(6))
@@ -184,14 +205,16 @@ public class Frame_Appointment extends JFrame {
 				
 			}
 			
+			int i = 0;
+			DefaultTableModel defModel = (DefaultTableModel) table_1.getModel();
 			for (Appointment temp : apptEntities) {
-		        System.out.println(
-		          temp.apptNum + " " + 
-		          temp.roomNum + " " + 
-		          temp.apptTime
-		        );
-		        System.out.println();
+				defModel.addRow(new Object[] {apptEntities.get(i).apptNum,apptEntities.get(i).roomNum,apptEntities.get(i).apptDate,apptEntities.get(i).doctorID,apptEntities.get(i).patientSSN,apptEntities.get(i).apptTime});
+		       
+		        i++;
 		      }
+			table.setModel(defModel);
+			JScrollPane newScrollPane = new JScrollPane();
+			newScrollPane.setViewportView(table);
 			
 			
 			

@@ -7,14 +7,14 @@ import java.util.*;
 public class Appointment {
 
   public String apptNum, roomNum, patientSSN, doctorID, apptTime; //confirmedPSSN is the foreign key
-  public Date apptDate;
+  public String apptDate;
 
   public Appointment() {}
 
   public Appointment(
     String apptNum,
     String roomNum,
-    Date apptDate,
+    String apptDate,
     String doctorID,
     String patientSSN,       
     String apptTime
