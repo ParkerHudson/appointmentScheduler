@@ -3,12 +3,16 @@ package project.views;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -16,19 +20,23 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import net.proteanit.sql.DbUtils;
+import project.common.input_verify;
+import project.common.jdbc_connection;
 
 import javax.swing.JCheckBox;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JSpinner;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Frame_ViewBill extends JFrame {
-	private JTextField textField_4;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_5;
+	private JTextField txtRemaining;
+	private JTextField txtInsuranceCov;
+	private JTextField txtPatientPay;
+	private JTextField txtTotal;
 
 	/**
 	 * Launch the application.
@@ -57,6 +65,18 @@ public class Frame_ViewBill extends JFrame {
 
 	}
 	
+	Connection connection = null; // connection var
+	private JComboBox cbBillNum;
+	private JButton btnLoad;
+	private JButton btnBack;
+	private JCheckBox chckbxCheckup;
+	private JCheckBox chckbxImmunizations;
+	private JCheckBox chckbxPrescription;
+	private JCheckBox chckbxConsultation;
+	private JComboBox cbPatientSSN;
+	private JButton btnRefresh;
+	private JButton btnSave;
+	private JButton btnDelete;
 	private void init_components() {
 		setBounds(100, 100, 733, 466);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,18 +97,14 @@ public class Frame_ViewBill extends JFrame {
 		lblEnterAppointment.setBounds(10, 71, 196, 26);
 		getContentPane().add(lblEnterAppointment);
 		
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Dialog", Font.PLAIN, 16));
-		textField_4.setColumns(10);
-		textField_4.setBounds(10, 96, 185, 26);
-		getContentPane().add(textField_4);
+		btnLoad = new JButton("Load");
 		
-		JButton btnLoad = new JButton("Load");
 		btnLoad.setFont(new Font("Dialog", Font.PLAIN, 16));
 		btnLoad.setBounds(203, 97, 94, 25);
 		getContentPane().add(btnLoad);
 		
-		JButton btnDelete = new JButton("Delete");
+		btnDelete = new JButton("Delete");
+		
 		btnDelete.setFont(new Font("Dialog", Font.PLAIN, 16));
 		btnDelete.setBounds(307, 97, 94, 25);
 		getContentPane().add(btnDelete);
@@ -123,20 +139,15 @@ public class Frame_ViewBill extends JFrame {
 		lblDoctorName.setBounds(10, 267, 129, 20);
 		getContentPane().add(lblDoctorName);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(194, 267, 130, 20);
-		getContentPane().add(textField);
+		txtRemaining = new JTextField();
+		txtRemaining.setColumns(10);
+		txtRemaining.setBounds(194, 267, 130, 20);
+		getContentPane().add(txtRemaining);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(194, 169, 130, 20);
-		getContentPane().add(textField_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(194, 138, 130, 20);
-		getContentPane().add(textField_2);
+		txtInsuranceCov = new JTextField();
+		txtInsuranceCov.setColumns(10);
+		txtInsuranceCov.setBounds(194, 169, 130, 20);
+		getContentPane().add(txtInsuranceCov);
 		
 		JLabel lblNewLabel_1 = new JLabel("Procedures Completed");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
@@ -144,43 +155,264 @@ public class Frame_ViewBill extends JFrame {
 		lblNewLabel_1.setBounds(427, 143, 185, 32);
 		getContentPane().add(lblNewLabel_1);
 		
-		JCheckBox chckbxCheckup = new JCheckBox("Checkup");
+		chckbxCheckup = new JCheckBox("Checkup");
 		chckbxCheckup.setFont(new Font("Dialog", Font.PLAIN, 12));
 		chckbxCheckup.setBounds(427, 185, 97, 23);
 		getContentPane().add(chckbxCheckup);
 		
-		JCheckBox chckbxImmunizations = new JCheckBox("Immunizations");
+		chckbxImmunizations = new JCheckBox("Immunizations");
 		chckbxImmunizations.setFont(new Font("Dialog", Font.PLAIN, 12));
 		chckbxImmunizations.setBounds(427, 211, 113, 23);
 		getContentPane().add(chckbxImmunizations);
 		
-		JCheckBox chckbxPrescription = new JCheckBox("Prescription");
+		chckbxPrescription = new JCheckBox("Prescription");
 		chckbxPrescription.setFont(new Font("Dialog", Font.PLAIN, 12));
 		chckbxPrescription.setBounds(427, 236, 97, 23);
 		getContentPane().add(chckbxPrescription);
 		
-		JCheckBox chckbxConsultation = new JCheckBox("Consultation");
+		chckbxConsultation = new JCheckBox("Consultation");
 		chckbxConsultation.setFont(new Font("Dialog", Font.PLAIN, 12));
 		chckbxConsultation.setBounds(427, 264, 97, 23);
 		getContentPane().add(chckbxConsultation);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(194, 202, 130, 20);
-		getContentPane().add(textField_3);
+		txtPatientPay = new JTextField();
+		txtPatientPay.setColumns(10);
+		txtPatientPay.setBounds(194, 202, 130, 20);
+		getContentPane().add(txtPatientPay);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(194, 237, 130, 20);
-		getContentPane().add(textField_5);
+		txtTotal = new JTextField();
+		txtTotal.setColumns(10);
+		txtTotal.setBounds(194, 237, 130, 20);
+		getContentPane().add(txtTotal);
 		
+		btnRefresh = new JButton("Refresh");
 		
+		btnRefresh.setFont(new Font("Dialog", Font.PLAIN, 16));
+		btnRefresh.setBounds(379, 342, 94, 60);
+		getContentPane().add(btnRefresh);
 		
+		btnSave = new JButton("Save");
 		
+		btnSave.setFont(new Font("Dialog", Font.PLAIN, 16));
+		btnSave.setBounds(587, 342, 94, 60);
+		getContentPane().add(btnSave);
+		
+		btnBack = new JButton("Back");
+		
+		btnBack.setFont(new Font("Dialog", Font.PLAIN, 16));
+		btnBack.setBounds(483, 342, 94, 60);
+		getContentPane().add(btnBack);
+		
+		cbBillNum = new JComboBox();
+		cbBillNum.setBounds(8, 99, 185, 26);
+		getContentPane().add(cbBillNum);
+		
+		cbPatientSSN = new JComboBox();
+		cbPatientSSN.setEditable(true);
+		cbPatientSSN.setBounds(194, 133, 130, 23);
+		getContentPane().add(cbPatientSSN);
 		
 	}
 	
 	private void create_events() {
+		set_bill();
+		set_patientSSN();
 		
+		// loads bill data
+		btnLoad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				display_info(cbBillNum.getSelectedItem().toString());
+				display_services(cbBillNum.getSelectedItem().toString());
+			}
+		});
+		
+		// returns to bills
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			dispose();
+			Frame_Bills bills = new Frame_Bills();
+			bills.setVisible(true);
+			}
+		});
+		
+		// edits bills
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				edit_info(cbBillNum.getSelectedItem().toString());
+			}
+		});
+		
+		// refreshes data
+		btnRefresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				display_info(cbBillNum.getSelectedItem().toString());
+				display_services(cbBillNum.getSelectedItem().toString());
+			}
+		});
+		
+		// deletes 
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int action = JOptionPane.showConfirmDialog(null, "Do you really want to delete?","Choose an option",JOptionPane.YES_NO_OPTION);
+				if (action == 0) {
+					delete_bill(cbBillNum.getSelectedItem().toString());
+				}
+			}
+		});
+	}
+	
+	private void set_bill() {
+		connection = jdbc_connection.dbConnection(); //db connection
+		String query = "SELECT billnumber FROM bills";
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			PreparedStatement pStmt = connection.prepareStatement(query);
+			ResultSet rs = pStmt.executeQuery();
+			while (rs.next()) { 
+			    list.add(rs.getString(1));
+			}
+			cbBillNum.setModel(new DefaultComboBoxModel<String>(list.toArray(new String[0])));
+			pStmt.close();
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void set_patientSSN() {
+		connection = jdbc_connection.dbConnection(); //db connection
+		String query = "SELECT bills_ssn FROM bills";
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			PreparedStatement pStmt = connection.prepareStatement(query);
+			ResultSet rs = pStmt.executeQuery();
+			while (rs.next()) { 
+			    list.add(rs.getString(1));
+			}
+			cbPatientSSN.setModel(new DefaultComboBoxModel<String>(list.toArray(new String[0])));
+			pStmt.close();
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void display_info(String id) {
+		try {
+			String query = "SELECT bills_ssn, amtinsur, amtpatient, totalcharge, final_amtdue FROM bills WHERE billnumber = '" + id + "'";
+			PreparedStatement pStmt = connection.prepareStatement(query);
+			ResultSet rs = pStmt.executeQuery();
+			while (rs.next()) {
+				cbPatientSSN.getEditor().setItem(rs.getString(1));
+				txtInsuranceCov.setText(rs.getString(2));
+				txtPatientPay.setText(rs.getString(3));
+				txtTotal.setText(rs.getString(4));
+				txtRemaining.setText(rs.getString(5));
+				
+			}	
+			pStmt.close();
+		} catch (SQLException e1) {	
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Uhhh something got bonked..");
+		}
+	}
+	
+	private void display_services(String id) {
+		String query = "SELECT services FROM bills WHERE billnumber = '" + id + "'";
+		String services = "";
+		try {
+			PreparedStatement pStmt = connection.prepareStatement(query);
+			ResultSet rs = pStmt.executeQuery();
+			while (rs.next()) {
+				services = rs.getString(1);
+			}	
+			if (services.contains("checkup")) {
+				chckbxCheckup.setSelected(true);
+			}
+			if (services.contains("immunizations")) {
+				chckbxImmunizations.setSelected(true);
+			}
+			if (services.contains("prescription")) {
+				chckbxPrescription.setSelected(true);
+			}
+			if (services.contains("consultation")) {
+				chckbxConsultation.setSelected(true);
+			}
+		} catch(SQLException e1) {
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Uhhh something got bonked..");
+		}
+	}
+	
+	private void edit_info(String id) { 	
+		try {
+			int immunization = 125;
+			int checkup = 250;
+			int prescription = 40;
+			int consultation = 200;
+			double totalCharge = 0;
+			int insuranceCov = Integer.parseInt(txtInsuranceCov.getText());
+			int patientCov = Integer.parseInt(txtPatientPay.getText());
+			String services = "";
+			
+			String query = "UPDATE bills SET amtinsur=?, amtpatient=?, totalcharge=?, final_amtdue=?, services=? WHERE bills_ssn=?";
+			PreparedStatement pStmt = connection.prepareStatement(query);
+			pStmt.setString(6, cbPatientSSN.getSelectedItem().toString());	
+			pStmt.setInt(1, insuranceCov);
+			pStmt.setInt(2, patientCov);
+			
+			
+			if(chckbxConsultation.isSelected()) {
+				//increase totalCharge by 200
+				totalCharge+=consultation;
+				//add consultation to services
+				services = services + "consultation,";
+			}
+			if(chckbxPrescription.isSelected()) {
+				//increase totalCharge by 40
+				totalCharge+=prescription;
+				//add prescription to services
+				services = services + "prescription,";
+			}
+			if(chckbxCheckup.isSelected()) {
+				totalCharge+=checkup;
+				services = services + "checkup,";
+				
+			}
+			if(chckbxImmunizations.isSelected()) {
+				totalCharge+=immunization;
+				services = services + "immunizations,";
+			}
+			pStmt.setDouble(3, totalCharge);
+			
+			
+			double finalAmt = totalCharge - (insuranceCov + patientCov);
+			pStmt.setDouble(4, finalAmt);
+			pStmt.setString(5, services);
+			
+			pStmt.execute();
+			JOptionPane.showMessageDialog(null, "Bill Updated");	
+			pStmt.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		
+	}
+	
+	private void delete_bill (String id) {
+		String query = "DELETE FROM bills WHERE billnumber=?";
+		try {
+			PreparedStatement pStmt = connection.prepareStatement(query);
+			pStmt.setString(1, id);	
+			pStmt.executeQuery();
+			JOptionPane.showMessageDialog(null, "Bill Deleted");
+			pStmt.close();
+		} catch (java.sql.SQLException e1) {
+			e1.printStackTrace();
+		}
 	}
 }

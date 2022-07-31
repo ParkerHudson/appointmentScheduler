@@ -82,7 +82,7 @@ public class Frame_Patient extends JFrame {
 		
 		btnEdit.setFont(new Font("CMU Serif", Font.PLAIN, 25));
 		
-		btnBack = new JButton("Back");
+		btnBack =new JButton("Back");
 		
 		btnBack.setFont(new Font("CMU Serif", Font.PLAIN, 25));
 		

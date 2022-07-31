@@ -169,6 +169,15 @@ public class Frame1 {
 			}
 		});
 		
+		//Set Frame to bills
+		btnBills.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame1.dispose();
+				Frame_Bills frame_bills = new Frame_Bills();
+				frame_bills.setVisible(true);
+			}
+		});
+		
 		// sets frame to views
 		btnViews.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

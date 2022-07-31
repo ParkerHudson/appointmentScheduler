@@ -97,7 +97,7 @@ public class Frame_PatientCreate extends JFrame {
 		
 		connection = jdbc_connection.dbConnection(); //db connection
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 578, 704);
+		setBounds(100, 100, 578, 644);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -107,238 +107,171 @@ public class Frame_PatientCreate extends JFrame {
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		
 		txtLastName = new JTextField();
+		txtLastName.setBounds(154, 53, 244, 27);
 		txtLastName.setToolTipText("Last name");
 		txtLastName.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtLastName.setColumns(10);
 		
 		JLabel lblName = new JLabel("Last Name :");
+		lblName.setBounds(15, 56, 97, 22);
 		lblName.setFont(new Font("CMU Serif", Font.BOLD, 16));
 		
 		lblFirstName = new JLabel("First Name :");
+		lblFirstName.setBounds(15, 97, 121, 22);
 		lblFirstName.setFont(new Font("CMU Serif", Font.BOLD, 16));
 		
 		lblMiddleInitial = new JLabel("Middle Initial :");
+		lblMiddleInitial.setBounds(15, 136, 120, 22);
 		lblMiddleInitial.setFont(new Font("CMU Serif", Font.BOLD, 16));
 		
 		txtFirstName = new JTextField();
+		txtFirstName.setBounds(154, 92, 244, 27);
 		txtFirstName.setToolTipText("First name");
 		txtFirstName.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtFirstName.setColumns(10);
 		
 		lblGender = new JLabel("Gender :");
+		lblGender.setBounds(15, 174, 69, 22);
 		lblGender.setFont(new Font("CMU Serif", Font.BOLD, 16));
 		
 		cbGender = new JComboBox();
+		cbGender.setBounds(154, 171, 82, 27);
 		cbGender.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		cbGender.setToolTipText("gender");
 		cbGender.setModel(new DefaultComboBoxModel(new String[] {"Male", "Female"}));
 		
 		cbMiddleInitial = new JComboBox();
+		cbMiddleInitial.setBounds(154, 133, 111, 27);
 		cbMiddleInitial.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		cbMiddleInitial.setModel(new DefaultComboBoxModel(new String[] {"(No Initial)", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}));
 		
 		lblDateOfBirth = new JLabel("Date of Birth:");
+		lblDateOfBirth.setBounds(15, 216, 113, 22);
 		lblDateOfBirth.setFont(new Font("CMU Serif", Font.BOLD, 16));
 		
 		lblInsuranceId = new JLabel("Insurance ID:");
+		lblInsuranceId.setBounds(15, 264, 113, 22);
 		lblInsuranceId.setFont(new Font("CMU Serif", Font.BOLD, 16));
 		
 		txtInsuranceID = new JTextField();
+		txtInsuranceID.setBounds(154, 261, 244, 27);
 		txtInsuranceID.setToolTipText("First name");
 		txtInsuranceID.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtInsuranceID.setColumns(10);
 		
 		lblSsn = new JLabel("SSN:");
+		lblSsn.setBounds(15, 302, 113, 22);
 		lblSsn.setFont(new Font("CMU Serif", Font.BOLD, 16));
 		
 		txtSSN = new JTextField();
+		txtSSN.setBounds(154, 299, 244, 27);
 		txtSSN.setToolTipText("First name");
 		txtSSN.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtSSN.setColumns(10);
 		
 		lblAddress = new JLabel("Address:");
+		lblAddress.setBounds(5, 378, 113, 22);
 		lblAddress.setFont(new Font("CMU Serif", Font.BOLD, 16));
 		
 		txtStreet = new JTextField();
+		txtStreet.setBounds(169, 418, 244, 27);
 		txtStreet.setToolTipText("First name");
 		txtStreet.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtStreet.setColumns(10);
 		
 		lblStreet = new JLabel("Street");
+		lblStreet.setBounds(66, 421, 48, 22);
 		lblStreet.setFont(new Font("CMU Serif", Font.BOLD, 16));
 		
 		lblCity = new JLabel("City");
+		lblCity.setBounds(66, 459, 48, 22);
 		lblCity.setFont(new Font("CMU Serif", Font.BOLD, 16));
 		
 		txtCity = new JTextField();
+		txtCity.setBounds(169, 456, 244, 27);
 		txtCity.setToolTipText("First name");
 		txtCity.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtCity.setColumns(10);
 		
 		lblState = new JLabel("State");
+		lblState.setBounds(66, 497, 41, 22);
 		lblState.setFont(new Font("CMU Serif", Font.BOLD, 16));
 		
 		txtState = new JTextField();
+		txtState.setBounds(169, 494, 244, 27);
 		txtState.setToolTipText("First name");
 		txtState.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtState.setColumns(10);
 		
 		lblCountry = new JLabel("Country");
+		lblCountry.setBounds(66, 530, 99, 22);
 		lblCountry.setFont(new Font("CMU Serif", Font.BOLD, 16));
 		
 		txtCountry = new JTextField();
+		txtCountry.setBounds(169, 527, 244, 27);
 		txtCountry.setToolTipText("First name");
 		txtCountry.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtCountry.setColumns(10);
 		
 		lblTitle = new JLabel("ADD NEW PATIENTS");
+		lblTitle.setBounds(162, 5, 220, 25);
 		lblTitle.setFont(new Font("CMU Serif", Font.BOLD, 18));
 		
 		lblZipcode = new JLabel("Zipcode");
+		lblZipcode.setBounds(66, 563, 67, 22);
 		lblZipcode.setFont(new Font("CMU Serif", Font.BOLD, 16));
 		
 		txtZipcode = new JTextField();
+		txtZipcode.setBounds(169, 560, 244, 27);
 		txtZipcode.setToolTipText("First name");
 		txtZipcode.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtZipcode.setColumns(10);
 		
 		btnCreate = new JButton("Create");
+		btnCreate.setBounds(459, 530, 93, 66);
 		
 		
 		btnCreate.setFont(new Font("CMU Serif", Font.BOLD, 18));
 		
 		btnBack = new JButton("Back");
+		btnBack.setBounds(459, 436, 93, 66);
 		
 		btnBack.setFont(new Font("CMU Serif", Font.BOLD, 18));
 		
 		dateChooser = new JDateChooser();
+		dateChooser.setBounds(154, 216, 144, 27);
 		dateChooser.setDateFormatString("MM/dd/yyyy");
 		dateChooser.getCalendarButton().setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		dateChooser.setFont(new Font("CMU Serif", Font.PLAIN, 16));
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(157)
-							.addComponent(lblTitle))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(10)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblFirstName, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblName)
-										.addComponent(lblMiddleInitial)))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(lblGender))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(lblDateOfBirth))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(lblInsuranceId, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(lblSsn, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)))
-							.addGap(18)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(txtInsuranceID, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
-								.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
-								.addComponent(cbMiddleInitial, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtLastName, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
-								.addComponent(cbGender, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtSSN, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)))
-						.addComponent(lblAddress, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(61)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblState)
-								.addComponent(lblCity, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblCountry, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblZipcode, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblStreet))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(txtCity, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-									.addComponent(txtState, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
-									.addComponent(txtCountry, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
-									.addComponent(txtZipcode, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addGap(10)
-										.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-										.addGap(36)
-										.addComponent(btnCreate)))
-								.addComponent(txtStreet, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE))))
-					.addGap(144))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(lblTitle)
-					.addGap(23)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblName)
-						.addComponent(txtLastName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(12)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(5)
-							.addComponent(lblFirstName))
-						.addComponent(txtFirstName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(14)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblMiddleInitial)
-						.addComponent(cbMiddleInitial, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(cbGender, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblGender))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblDateOfBirth)
-						.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblInsuranceId)
-						.addComponent(txtInsuranceID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtSSN, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblSsn))
-					.addGap(52)
-					.addComponent(lblAddress)
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtStreet, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblStreet))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblCity)
-						.addComponent(txtCity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblState)
-						.addComponent(txtState, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblCountry)
-						.addComponent(txtCountry, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblZipcode)
-						.addComponent(txtZipcode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(null);
+		contentPane.add(lblTitle);
+		contentPane.add(lblFirstName);
+		contentPane.add(lblName);
+		contentPane.add(lblMiddleInitial);
+		contentPane.add(lblGender);
+		contentPane.add(lblDateOfBirth);
+		contentPane.add(lblInsuranceId);
+		contentPane.add(lblSsn);
+		contentPane.add(txtInsuranceID);
+		contentPane.add(dateChooser);
+		contentPane.add(cbMiddleInitial);
+		contentPane.add(txtLastName);
+		contentPane.add(txtFirstName);
+		contentPane.add(cbGender);
+		contentPane.add(txtSSN);
+		contentPane.add(lblAddress);
+		contentPane.add(lblState);
+		contentPane.add(lblCity);
+		contentPane.add(lblCountry);
+		contentPane.add(lblZipcode);
+		contentPane.add(lblStreet);
+		contentPane.add(txtCity);
+		contentPane.add(txtState);
+		contentPane.add(txtCountry);
+		contentPane.add(txtZipcode);
+		contentPane.add(btnBack);
+		contentPane.add(btnCreate);
+		contentPane.add(txtStreet);
 	}
 	
 	//////////////////////////////////////////////////////////
