@@ -74,7 +74,6 @@ public class Frame_Appointment extends JFrame {
 	
 	Connection connection = null; // connection var
 	private JButton btnCreate;
-	private JButton btnBillAppt;
 	private JTable table_1;
 
 	/**
@@ -116,23 +115,18 @@ public class Frame_Appointment extends JFrame {
 		
 		btnCreate = new JButton("Create");
 		btnCreate.setFont(new Font("CMU Serif", Font.PLAIN, 25));
-		
-		btnBillAppt = new JButton("Bill Appt");
-		btnBillAppt.setFont(new Font("Dialog", Font.PLAIN, 25));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-							.addComponent(btnCreate, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-							.addComponent(lblAppointments, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-							.addComponent(btnEdit, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-							.addComponent(btnBack, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
-						.addComponent(btnBillAppt, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
+						.addComponent(btnCreate, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+						.addComponent(lblAppointments, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+						.addComponent(btnEdit, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+						.addComponent(btnBack, GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
 					.addGap(18)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
@@ -147,10 +141,8 @@ public class Frame_Appointment extends JFrame {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnEdit, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnBillAppt, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
-							.addGap(5))
+							.addGap(73))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 335, GroupLayout.PREFERRED_SIZE)))
@@ -253,15 +245,6 @@ public class Frame_Appointment extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Frame_AppointmentEdit editAppt = new Frame_AppointmentEdit();
 				editAppt.setVisible(true);
-				dispose();
-			}
-		});
-		
-		//Switch to billing frame
-		btnBillAppt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Frame_BillAppointment billAppt = new Frame_BillAppointment();
-				billAppt.setVisible(true);
 				dispose();
 			}
 		});

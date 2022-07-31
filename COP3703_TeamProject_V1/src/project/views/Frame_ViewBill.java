@@ -22,11 +22,13 @@ import javax.swing.JButton;
 import javax.swing.JSpinner;
 import com.toedter.calendar.JDateChooser;
 
-public class Frame_AppointmentEdit extends JFrame {
+public class Frame_ViewBill extends JFrame {
 	private JTextField textField_4;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_5;
 
 	/**
 	 * Launch the application.
@@ -35,7 +37,7 @@ public class Frame_AppointmentEdit extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Frame_AppointmentEdit frame = new Frame_AppointmentEdit();
+					Frame_ViewBill frame = new Frame_ViewBill();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,9 +49,9 @@ public class Frame_AppointmentEdit extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Frame_AppointmentEdit() {
+	public Frame_ViewBill() {
 		setTitle("Big Bob's Band-aids & More");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Frame_AppointmentEdit.class.getResource("/project/resources/icon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Frame_ViewBill.class.getResource("/project/resources/icon.png")));
 		init_components();
 		create_events();
 
@@ -64,12 +66,13 @@ public class Frame_AppointmentEdit extends JFrame {
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		getContentPane().setLayout(null);
 		
-		JLabel lblTitle = new JLabel("Edit Appointment");
+		JLabel lblTitle = new JLabel("Bill Details");
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblTitle.setBounds(262, 11, 291, 40);
+		lblTitle.setBounds(10, 11, 697, 40);
 		getContentPane().add(lblTitle);
 		
-		JLabel lblEnterAppointment = new JLabel("Enter Appointment #:");
+		JLabel lblEnterAppointment = new JLabel("Enter Bill #:");
 		lblEnterAppointment.setFont(new Font("Dialog", Font.BOLD, 16));
 		lblEnterAppointment.setBounds(10, 71, 196, 26);
 		getContentPane().add(lblEnterAppointment);
@@ -93,84 +96,83 @@ public class Frame_AppointmentEdit extends JFrame {
 		JLabel lblNewLabel = new JLabel("Patient SSN:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblNewLabel.setBounds(97, 183, 103, 14);
+		lblNewLabel.setBounds(10, 141, 103, 14);
 		getContentPane().add(lblNewLabel);
 		
-		JLabel lblRoom = new JLabel("Room #:");
+		JLabel lblRoom = new JLabel("Insurance Coverage:");
 		lblRoom.setHorizontalAlignment(SwingConstants.LEFT);
 		lblRoom.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblRoom.setBounds(97, 214, 91, 14);
+		lblRoom.setBounds(10, 172, 160, 14);
 		getContentPane().add(lblRoom);
 		
-		JLabel lblAppointmentTime = new JLabel("Appt. Date:");
+		JLabel lblAppointmentTime = new JLabel("Patient Payment:");
 		lblAppointmentTime.setHorizontalAlignment(SwingConstants.LEFT);
 		lblAppointmentTime.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblAppointmentTime.setBounds(97, 239, 91, 25);
+		lblAppointmentTime.setBounds(10, 197, 160, 25);
 		getContentPane().add(lblAppointmentTime);
 		
-		JLabel lblApptTime = new JLabel("Appt Time: ");
+		JLabel lblApptTime = new JLabel("Total: ");
 		lblApptTime.setHorizontalAlignment(SwingConstants.LEFT);
 		lblApptTime.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblApptTime.setBounds(97, 275, 91, 23);
+		lblApptTime.setBounds(10, 233, 91, 23);
 		getContentPane().add(lblApptTime);
 		
-		JLabel lblDoctorName = new JLabel("Doctor's ID:");
+		JLabel lblDoctorName = new JLabel("Remaining:");
 		lblDoctorName.setHorizontalAlignment(SwingConstants.LEFT);
 		lblDoctorName.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblDoctorName.setBounds(97, 309, 129, 20);
+		lblDoctorName.setBounds(10, 267, 129, 20);
 		getContentPane().add(lblDoctorName);
 		
 		textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(236, 312, 130, 20);
+		textField.setBounds(194, 267, 130, 20);
 		getContentPane().add(textField);
-		
-		JSpinner spinner = new JSpinner();
-		spinner.setBounds(236, 279, 130, 20);
-		getContentPane().add(spinner);
-		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.getCalendarButton().setFont(new Font("Dialog", Font.PLAIN, 16));
-		dateChooser.setFont(new Font("Dialog", Font.PLAIN, 16));
-		dateChooser.setDateFormatString("MM/dd/yyyy");
-		dateChooser.setBounds(236, 244, 130, 20);
-		getContentPane().add(dateChooser);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(236, 214, 130, 20);
+		textField_1.setBounds(194, 169, 130, 20);
 		getContentPane().add(textField_1);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(236, 183, 130, 20);
+		textField_2.setBounds(194, 138, 130, 20);
 		getContentPane().add(textField_2);
 		
-		JLabel lblNewLabel_1 = new JLabel("Procedures");
+		JLabel lblNewLabel_1 = new JLabel("Procedures Completed");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblNewLabel_1.setBounds(462, 174, 97, 32);
+		lblNewLabel_1.setBounds(427, 143, 185, 32);
 		getContentPane().add(lblNewLabel_1);
 		
 		JCheckBox chckbxCheckup = new JCheckBox("Checkup");
 		chckbxCheckup.setFont(new Font("Dialog", Font.PLAIN, 12));
-		chckbxCheckup.setBounds(462, 216, 97, 23);
+		chckbxCheckup.setBounds(427, 185, 97, 23);
 		getContentPane().add(chckbxCheckup);
 		
 		JCheckBox chckbxImmunizations = new JCheckBox("Immunizations");
 		chckbxImmunizations.setFont(new Font("Dialog", Font.PLAIN, 12));
-		chckbxImmunizations.setBounds(462, 242, 113, 23);
+		chckbxImmunizations.setBounds(427, 211, 113, 23);
 		getContentPane().add(chckbxImmunizations);
 		
 		JCheckBox chckbxPrescription = new JCheckBox("Prescription");
 		chckbxPrescription.setFont(new Font("Dialog", Font.PLAIN, 12));
-		chckbxPrescription.setBounds(462, 267, 97, 23);
+		chckbxPrescription.setBounds(427, 236, 97, 23);
 		getContentPane().add(chckbxPrescription);
 		
 		JCheckBox chckbxConsultation = new JCheckBox("Consultation");
 		chckbxConsultation.setFont(new Font("Dialog", Font.PLAIN, 12));
-		chckbxConsultation.setBounds(462, 295, 97, 23);
+		chckbxConsultation.setBounds(427, 264, 97, 23);
 		getContentPane().add(chckbxConsultation);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(194, 202, 130, 20);
+		getContentPane().add(textField_3);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(194, 237, 130, 20);
+		getContentPane().add(textField_5);
 		
 		
 		
