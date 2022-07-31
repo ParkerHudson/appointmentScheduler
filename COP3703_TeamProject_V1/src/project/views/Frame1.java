@@ -93,7 +93,7 @@ public class Frame1 {
 		
 		btnExit.setFont(new Font("CMU Serif", Font.PLAIN, 25));
 		
-		lblNewLabel = new JLabel("New label");
+		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Frame1.class.getResource("/project/resources/logo.png")));
 
 		GroupLayout groupLayout = new GroupLayout(frame1.getContentPane());
@@ -108,14 +108,14 @@ public class Frame1 {
 						.addComponent(btnBills, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnViews, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 459, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(30)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 438, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
+					.addGap(16)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 437, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
