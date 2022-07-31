@@ -88,6 +88,8 @@ public class Frame_PatientCreate extends JFrame {
 	 * @throws SQLException 
 	 */
 	public Frame_PatientCreate() throws SQLException {
+		setTitle("Big Bob's Band-aids & More");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Frame_PatientCreate.class.getResource("/project/resources/icon.png")));
 		init_components();		
 		create_events();
 		
@@ -155,7 +157,7 @@ public class Frame_PatientCreate extends JFrame {
 		
 		txtInsuranceID = new JTextField();
 		txtInsuranceID.setBounds(154, 261, 244, 27);
-		txtInsuranceID.setToolTipText("First name");
+		txtInsuranceID.setToolTipText("InsuranceID");
 		txtInsuranceID.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtInsuranceID.setColumns(10);
 		
@@ -165,7 +167,7 @@ public class Frame_PatientCreate extends JFrame {
 		
 		txtSSN = new JTextField();
 		txtSSN.setBounds(154, 299, 244, 27);
-		txtSSN.setToolTipText("First name");
+		txtSSN.setToolTipText("SSN");
 		txtSSN.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtSSN.setColumns(10);
 		
@@ -175,7 +177,7 @@ public class Frame_PatientCreate extends JFrame {
 		
 		txtStreet = new JTextField();
 		txtStreet.setBounds(169, 418, 244, 27);
-		txtStreet.setToolTipText("First name");
+		txtStreet.setToolTipText("Street");
 		txtStreet.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtStreet.setColumns(10);
 		
@@ -189,7 +191,7 @@ public class Frame_PatientCreate extends JFrame {
 		
 		txtCity = new JTextField();
 		txtCity.setBounds(169, 456, 244, 27);
-		txtCity.setToolTipText("First name");
+		txtCity.setToolTipText("City");
 		txtCity.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtCity.setColumns(10);
 		
@@ -199,7 +201,7 @@ public class Frame_PatientCreate extends JFrame {
 		
 		txtState = new JTextField();
 		txtState.setBounds(169, 494, 244, 27);
-		txtState.setToolTipText("First name");
+		txtState.setToolTipText("State");
 		txtState.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtState.setColumns(10);
 		
@@ -209,7 +211,7 @@ public class Frame_PatientCreate extends JFrame {
 		
 		txtCountry = new JTextField();
 		txtCountry.setBounds(169, 527, 244, 27);
-		txtCountry.setToolTipText("First name");
+		txtCountry.setToolTipText("Country");
 		txtCountry.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtCountry.setColumns(10);
 		
@@ -223,7 +225,7 @@ public class Frame_PatientCreate extends JFrame {
 		
 		txtZipcode = new JTextField();
 		txtZipcode.setBounds(169, 560, 244, 27);
-		txtZipcode.setToolTipText("First name");
+		txtZipcode.setToolTipText("Zipcode");
 		txtZipcode.setFont(new Font("CMU Serif", Font.PLAIN, 16));
 		txtZipcode.setColumns(10);
 		
