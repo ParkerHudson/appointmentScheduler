@@ -247,7 +247,7 @@ public class Frame_DoctorEdit extends JFrame {
 				 && input_verify.verify(txtSpecialization) == true) {
 			try {
 				
-				String query = "UPDATE doctors SET dfname=?, dminit=?, dlname=?, specilization=? WHERE doctorid=?";
+				String query = "UPDATE doctors SET dfname=?, dminit=?, dlname=?, specialization=? WHERE doctorid=?";
 				pStmt = connection.prepareStatement(query);
 				pStmt.setString(1, txtFirstName.getText());	
 				pStmt.setString(2, cbMiddleInitial.getSelectedItem().toString());	
