@@ -68,7 +68,7 @@ public class Frame_Views extends JFrame {
 	private void init_components() {
 		connection = jdbc_connection.dbConnection(); // db connection
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 701, 425);
+		setBounds(100, 100, 1085, 581);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -114,7 +114,7 @@ public class Frame_Views extends JFrame {
 		contentPane.add(btnPaidBills);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(171, 49, 506, 326);
+		scrollPane.setBounds(171, 49, 888, 493);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
