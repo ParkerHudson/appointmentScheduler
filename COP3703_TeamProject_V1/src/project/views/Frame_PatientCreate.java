@@ -289,7 +289,7 @@ public class Frame_PatientCreate extends JFrame {
 				PreparedStatement pStmt;
 				
 				while (verify.verify(txtFirstName) == true && verify.verify(txtLastName) == true 
-						&& verify.verify_int(txtSSN) == true && verify.verify(txtInsuranceID) == true) {
+						&& verify.verify_int(txtSSN) == true && verify.verify_int(txtInsuranceID) == true) {
 					try {
 						pStmt = connection.prepareStatement(query);
 						
