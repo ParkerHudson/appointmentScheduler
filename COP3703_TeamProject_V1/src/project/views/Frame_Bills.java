@@ -79,7 +79,9 @@ public class Frame_Bills extends JFrame {
 		
 		btnCreate.setFont(new Font("CMU Serif", Font.PLAIN, 25));
 		btnCreate.setBounds(10, 71, 212, 57);
+		btnCreate.setEnabled(false);
 		contentPane.add(btnCreate);
+		
 		
 		btnEdit = new JButton("Edit");
 		

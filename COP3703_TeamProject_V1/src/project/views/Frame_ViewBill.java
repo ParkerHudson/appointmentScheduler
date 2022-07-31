@@ -396,6 +396,9 @@ public class Frame_ViewBill extends JFrame {
 			JOptionPane.showMessageDialog(null, "Bill Updated");	
 			pStmt.close();
 			
+			display_info(cbBillNum.getSelectedItem().toString());
+			display_services(cbBillNum.getSelectedItem().toString());
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 

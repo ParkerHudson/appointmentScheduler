@@ -283,12 +283,23 @@ public class Frame_AppointmentEdit extends JFrame {
 	}
 		
 		private void info_delete(String num) {
-			String query = "DELETE FROM appointments WHERE apptnum=?";
+			String query = "DELETE FROM bills WHERE visit_charged=?";
 			try {
 				PreparedStatement pStmt = connection.prepareStatement(query);
 				pStmt.setString(1, num);	
 				pStmt.executeQuery();
-				JOptionPane.showMessageDialog(null, "Appointment Deleted");
+				//JOptionPane.showMessageDialog(null, "Appointment Deleted");
+				pStmt.close();
+			} catch (java.sql.SQLException e1) {
+				e1.printStackTrace();
+			}
+			
+			query = "DELETE FROM appointments WHERE apptnum=?";
+			try {
+				PreparedStatement pStmt = connection.prepareStatement(query);
+				pStmt.setString(1, num);	
+				pStmt.executeQuery();
+				JOptionPane.showMessageDialog(null, "Appointment and associated bill Deleted");
 				pStmt.close();
 			} catch (java.sql.SQLException e1) {
 				e1.printStackTrace();
